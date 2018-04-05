@@ -1,7 +1,10 @@
-library(data.table)
-library(shiny)
-library(lpSolve)
-library(htmltools)
+require(data.table)
+require(ggplot2)
+require(shiny)
+require(dplyr)
+require(lpSolve)
+require(htmltools)
+require(plyr)
 
 fluidPage(
   mainPanel(img(src='CWC_Small.png',height = 94/1.75, width = 500/1.75),
@@ -38,7 +41,7 @@ fluidPage(
                             min = 0, max = 150, 
                             value = 2),
                numericInput("Time", label = h5("Total Number of Months for Future Decision"), 
-                            min = 0, max = 60, 
+                            min = 0, max = 600, 
                             value = 12),
                numericInput("Ensemble", label = h5("Total Number of Ensemble Streamflow Forecasts"), 
                             min = 1, max = 2000, 
@@ -54,20 +57,29 @@ fluidPage(
                actionButton("Run_Model", "Run the Model")
       ),
       tabPanel("Results", 
-               h3("Results for Cost"),
-               tableOutput("Table_Cost"),
-               h3("Withdrawal with mean ensemble failure"),
+               h3("Results for cost using mean failure"),
+               tableOutput("Table_Cost_Mean"),
+               h3("Results for cost using median failure"),
+               tableOutput("Table_Cost_Median"),
+               h3("Withdrawal from all sources and mean failure"),
                plotOutput("plot_mean"),
-               h3("Withdrawal with median ensemble failure"),
-               plotOutput("plot_median")
+               h3("Withdrawal from all sources and median failure"),
+               plotOutput("plot_median"),
+               h3("Ensemble storage for all reserviors over time"),
+               plotOutput("Plot_Storage"),
+               h3("Mean, median and ensemble failure over time"),
+               plotOutput("Failure_Mean_Median")
       ),
       tabPanel("Download Data",
                selectInput("Data_Results", "Choose  a dataset to download",
-                           choices = c("Withdrawal from each source of supply (reservoirs and import sources) for each month", 
+                           choices = c("Withdrawal from each source of supply (reservoirs and import sources) for each month using mean failure",
+                                       "Withdrawal from each source of supply (reservoirs and import sources) for each month using median failure",
                                        "Ensemble, mean, median failure for each month", 
                                        "Supply for each user from all reservoirs for each month" ,
                                        "Supply for each user from all import sources for each month",
-                                       "Cost of supply and failure for each month"
+                                       "Cost of supply and failure for each month using mean failure",
+                                       "Cost of supply and failure for each month using median failure"
+                                       
                            )),
                # Button
                downloadButton("downloadData", "Download")

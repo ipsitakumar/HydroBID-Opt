@@ -9,8 +9,8 @@ if(Reservoir_Names_dim[1]==(nR) && Reservoir_Names_dim[2]==1){
 
 
 ## 2. Names of Import
-Import_Names_dim<-dim(impname)
 if (input$Imports > 0){
+Import_Names_dim<-dim(impname)
 if(Import_Names_dim[1]==nIMP && Import_Names_dim[2]==1){
     Import_Names_dim_A<-print("The dimension of the Import_Names.csv file is correct")
   } else {
@@ -58,8 +58,8 @@ if(Maximum_Reservoir_Capacity_dim[1]==(nR) && Maximum_Reservoir_Capacity_dim[2]=
 
 
 ## 7. Maximum Capacity of Import Sources
-Maximum_Import_Capacity_dim<-dim(IMPmax)
 if (input$Imports > 0){
+Maximum_Import_Capacity_dim<-dim(IMPmax)
 if(Maximum_Import_Capacity_dim[1]==nIMP && Maximum_Import_Capacity_dim[2]==2){
     Maximum_Import_Capacity_dim_A<- print("The dimension of the Maximum_Import_Capacity.csv file is correct")
   } else {
@@ -98,9 +98,8 @@ if(Reservoir_to_Municipality_dim[1]==nR && Reservoir_to_Municipality_dim[2]==(nM
 
 
 ## 11. Link Between Import and Municipality
-Import_to_Municipality_dim<-dim(im_connectivity)
-
 if (input$Imports > 0){
+Import_to_Municipality_dim<-dim(im_connectivity)
 if(Import_to_Municipality_dim[1]==nIMP && Import_to_Municipality_dim[2]==(nM+1)){
     Import_to_Municipality_dim_A<-print("The dimension of the Import_to_Municipality.csv file is correct")
   } else {
