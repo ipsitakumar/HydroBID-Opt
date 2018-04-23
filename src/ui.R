@@ -22,6 +22,7 @@ fluidPage(
                downloadButton("downloadManual", "Download Manual"),
                p(h5("You can download a zip file with an example here:")),
                downloadButton("downloadExample", "Download Example"),
+               p(h5("For the example, the number of reservoirs are set at 3, municipalities at 5, import sources at 2, number of months as 12 and the ensemble forecasts at 10.")),
                br(),
                br(),
                br(),
@@ -46,7 +47,8 @@ fluidPage(
                numericInput("Ensemble", label = h5("Total Number of Ensemble Streamflow Forecasts"), 
                             min = 1, max = 2000, 
                             value = 10),
-               fileInput("directory", label=h5("Upload all the files as described in the manual"), accept = ".csv", multiple = TRUE)                 #1
+               fileInput("directory", label=h5("Upload all the files as described in the manual"), accept = ".csv", multiple = TRUE),
+               p(h5("Once you have uploaded all the files, please go to the 'Checking the Data' section above"))#1
       ),
       tabPanel("Checking the Data", 
                h3("Numeric Inputs"),
@@ -54,6 +56,9 @@ fluidPage(
                h3("Inputs from .csv files"),
                tableOutput("csv_table"),
                tableOutput("csv_table_Inflow"),
+               br(),
+               br(),
+               p(h5("Click on Run the Model, and once you click it, go to the Results section")),
                actionButton("Run_Model", "Run the Model")
       ),
       tabPanel("Results", 
@@ -65,7 +70,7 @@ fluidPage(
                plotOutput("plot_mean"),
                h3("Withdrawal from all sources and median failure"),
                plotOutput("plot_median"),
-               h3("Ensemble storage for all reserviors over time"),
+               h3("Ensemble storage for all reservoirs over time"),
                plotOutput("Plot_Storage"),
                h3("Mean, median and ensemble failure over time"),
                plotOutput("Failure_Mean_Median")
@@ -82,7 +87,8 @@ fluidPage(
                                        
                            )),
                # Button
-               downloadButton("downloadData", "Download")
+               downloadButton("downloadData", "Download"),
+               p(h5("Once you have selected the data you want to download, click on the Download button to get .csv files of the results"))
       
       
     ))))
